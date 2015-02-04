@@ -16,7 +16,11 @@ def getnews(url):
         #print "OK"
         soup = BeautifulSoup(news.text)
         #header = soup.h1.text
-        header = soup.find("h1", class_="story-header").text
+        try:
+            header = soup.find("h1", class_="story-header").text
+        except AttributeError:
+            return "Error"
+
         try:
             bylinename = soup.find("span", class_="byline-name").text 
             bylinetitle = soup.find("span", class_="byline-title").text
@@ -32,7 +36,8 @@ def getnews(url):
                 content += a.text + "\n"
         image = [ x["src"] for x in main.findAll('img') ]
 
-        return (header,bylinename,bylinetitle,bylinephoto,content,image)
+        #return (header,bylinename,bylinetitle,bylinephoto,content,image)
+        print "%s %s %s %s %s %s" %  (header,bylinename,bylinetitle,bylinephoto,content,image)
         #return (header)
 
     else :
