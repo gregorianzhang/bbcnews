@@ -35,7 +35,6 @@ def getnewsurl(urllist):
 
 def getnews(urllist,keyword):
     for a in urllist:
-        print a
         main = requests.get(a)
         soup = BeautifulSoup(main.text)
         try:
@@ -54,7 +53,8 @@ def getnews(urllist,keyword):
 
 
         if maintext.find(keyword) != -1:
-            print  "title %s \n subheading %s \n maintext %s \n " % (title,subheading,maintext)
+            print a
+            print  "title\n %s \nsubheading\n %s \nmaintext\n %s \n " % (title,subheading,maintext)
         else:
             pass
 

@@ -2,10 +2,14 @@
 
 import requests
 from bs4 import BeautifulSoup
+#import sys
 
 urlli = []
 urllib = []
 
+#keyword = sys.argv[1]
+keyword = "digital humanity"
+print keyword
 def getnewurl(url):
     main = requests.get(url)
     soup = BeautifulSoup(main.text)
@@ -26,7 +30,7 @@ def getnewsurl(urllist):
         for x in main1:
             urllib.append(x["href"])
 
-        getnews(urllib,"digital humanity")
+        getnews(urllib,keyword)
 
     
 
@@ -34,7 +38,11 @@ def getnews(urllist,keyword):
     for a in urllist:
         main = requests.get(a)
         soup = BeautifulSoup(main.text)
-        title = soup.find("h1", class_ ="content__headline").text
+        try:
+            title = soup.find("h1", class_ ="content__headline").text
+        except AttributeError:
+            title = ""
+
         try:
             subheading = soup.find("div", class_ ="content__standfirst").p.text
         except AttributeError:
@@ -45,12 +53,15 @@ def getnews(urllist,keyword):
             maintext = ""
 
 
-    if maintext.find(keyword) != -1:
-        print  maintext
-    else:
-        pass
+        if maintext.find(keyword) != -1:
+            print a
+            print  "title\n %s \nsubheading\n %s \nmaintext\n %s \n " % (title,subheading,maintext)
+        else:
+            pass
 
 if __name__ == '__main__':
     url="http://www.theguardian.com/uk"
-#    getnewurl(url)
     getnewurl(url)
+    #getnewurl(url)
+#    urllib=["http://www.theguardian.com/us-news/2015/apr/14/hillary-clinton-political-finance-reform-2016-iowa",]
+#    getnews(urllib,keyword)
