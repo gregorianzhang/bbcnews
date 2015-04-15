@@ -38,7 +38,11 @@ def getnews(urllist,keyword):
         print a
         main = requests.get(a)
         soup = BeautifulSoup(main.text)
-        title = soup.find("h1", class_ ="content__headline").text
+        try:
+            title = soup.find("h1", class_ ="content__headline").text
+        except AttributeError:
+            title = ""
+
         try:
             subheading = soup.find("div", class_ ="content__standfirst").p.text
         except AttributeError:
@@ -49,12 +53,14 @@ def getnews(urllist,keyword):
             maintext = ""
 
 
-    if maintext.find(keyword) != -1:
-        print  maintext
-    else:
-        pass
+        if maintext.find(keyword) != -1:
+            print  "title %s \n subheading %s \n maintext %s \n " % (title,subheading,maintext)
+        else:
+            pass
 
 if __name__ == '__main__':
     url="http://www.theguardian.com/uk"
-#    getnewurl(url)
     getnewurl(url)
+    #getnewurl(url)
+#    urllib=["http://www.theguardian.com/us-news/2015/apr/14/hillary-clinton-political-finance-reform-2016-iowa",]
+#    getnews(urllib,keyword)
