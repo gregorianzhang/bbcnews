@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Bonnie pic</title>
+
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+
+
+</head>
+<body>
+<div class="main">
+<div class="images" style="height:350px;width:600px;float:left;">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="10000">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+abab
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+acac
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+<div class="google_maps" >
+   <div id="map-canvas"></div>
+
+
+</div>
+</div>
+
+<script>
+var map;
+function maps1(lat,lon){
+  var mapOptions = {
+    zoom: 16,
+    center: new google.maps.LatLng(lat,lon)
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+}
+
+  google.maps.event.addDomListener(window, 'load', maps1);
+
+$('.carousel').carousel();
+console.log("bb");
+$('#carousel-example-generic').on('slide.bs.carousel', function () {  
+var lat ;
+var lon;
+lat= $('div.active > img').attr('lat');
+lon = $('div.active > img').attr('lon')
+
+maps1(lat,lon);
+});
+</script>
+</body>
+</html>
